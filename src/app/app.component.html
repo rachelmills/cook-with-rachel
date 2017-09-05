@@ -3,7 +3,7 @@
 		<div class="col-md_12">
 			<app-header (pageToDisplay)="pageToDisplay($event)"></app-header>
 			<app-recipes *ngIf="page === 'recipes'"></app-recipes>
-			<app-shopping-list *ngIf="page === 'shopping-list'"></app-shopping-list>
+			<app-shopping-list *ngIf="page !== 'recipes'"></app-shopping-list>
 		</div>
 	</div>
 </div>
