@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping/shopping-list/shopping-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'recipes', pathMatch: 'full' },
-  { path: 'recipes', component: RecipesComponent, children: [
-  	{ path: 'new', component: RecipeEditComponent },
-  	{ path: ':id', component: RecipeDetailComponent },
-  	{ path: '', component: RecipeStartComponent	},
-	{ path: ':id/edit', component: RecipeEditComponent }	
-  ] },
-  { path: 'shopping', component: ShoppingListComponent }
-];
+  { path: '', component: HomeComponent },
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule', canLoad: [AuthGuard] },
+  { path: 'shopping', loadChildren: './shopping/shopping-list.module#ShoppingListModule' },
+ ];
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(appRoutes)
+		RouterModule.forRoot(appRoutes)  // forRoot can only be called in app module, otherwise use forChild
 	],
 	exports: [RouterModule]
 })

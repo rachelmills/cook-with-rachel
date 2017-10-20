@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { Http } from '@angular/http';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
@@ -30,7 +31,7 @@ export class RecipeService {
          ])
   	];
 
-    constructor(private shoppingListService: ShoppingListService){}
+    constructor(private shoppingListService: ShoppingListService, private http: Http) {}
 
   	getRecipes() {
   		return this.recipes.slice();    // returns copy of array, not actual array
@@ -58,7 +59,9 @@ export class RecipeService {
       this.recipes.splice(index, 1);
       this.recipesChanged.next(this.recipes.slice());
     }
-    saveRecipe(recipe: Recipe) {
-      return this.http.put('https://cook-with-rachel.firebaseio.com/recipe.json', recipe);
+
+    setRecipes(recipes: Recipe[]) {
+      this.recipes = recipes;
+      this.recipesChanged.next(this.recipes.slice());
     }
 }
