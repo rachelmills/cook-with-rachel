@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { DataStorageService } from '../shared/data-storage.service';
-import { AuthService } from '../auth/auth.service';
-import { Recipe } from '../recipes/recipe.model';
+import { DataStorageService } from '../../shared/data-storage.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,6 @@ import { Recipe } from '../recipes/recipe.model';
 export class HeaderComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService, private router: Router, private authService: AuthService) { }
-  recipes: Recipe[];
 
   ngOnInit() {
   }
@@ -45,5 +43,9 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
   }
 }

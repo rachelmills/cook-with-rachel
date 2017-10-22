@@ -23,7 +23,6 @@ const recipesRoutes: Routes = [
 		RouterModule.forChild(recipesRoutes)
 	],
 	exports: [RouterModule]
-
 })
 export class RecipesRoutingModule {
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/home/home.component';
 import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
@@ -12,7 +12,7 @@ const appRoutes: Routes = [
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(appRoutes)  // forRoot can only be called in app module, otherwise use forChild
+		RouterModule.forRoot(appRoutes, {preloadingStrategy	: PreloadAllModules})  // forRoot can only be called in app module, otherwise use forChild
 	],
 	exports: [RouterModule]
 })
